@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from '../../services/page.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-viewsingle-page',
@@ -11,7 +12,9 @@ export class ViewsinglePageComponent implements OnInit {
   pageId: any;
   pageData: any;
   panelOpenState = false;
-  constructor(private pageService: PageService, private activeRoute: ActivatedRoute, private router: Router) {
+  constructor(private pageService: PageService, private activeRoute: ActivatedRoute, private router: Router,
+    private spinner: NgxSpinnerService,  
+  ) {
     console.log(this.activeRoute.snapshot.queryParams);
     let data = this.activeRoute.snapshot.queryParams;
     this.pageId = data?.page;
@@ -25,9 +28,13 @@ export class ViewsinglePageComponent implements OnInit {
   }
 
   getPage(page) {
+    this.spinner.show();
     this.pageService.getPage(page).subscribe((resp: any) => {
       console.log(resp);
       this.pageData = resp?.data?.[0];
+      this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
     })
   }
 

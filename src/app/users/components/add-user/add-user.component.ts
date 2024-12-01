@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +15,7 @@ export class AddUserComponent implements OnInit {
 
   userRegistrationForm:any;
   constructor(private userService: UsersService, private _snackBar: MatSnackBar,
-  private dialogRef: MatDialogRef<AddUserComponent>  ) { }
+  private dialogRef: MatDialogRef<AddUserComponent>, private spinner: NgxSpinnerService,    ) { }
 
   ngOnInit(): void {
     this.initiateForm();
@@ -33,6 +34,7 @@ export class AddUserComponent implements OnInit {
     })
   }
   Submit(){
+    this.spinner.show();
     console.log(this.userRegistrationForm.value);
     let body = {
       fullname: this.userRegistrationForm.value.fullname,
@@ -46,6 +48,7 @@ export class AddUserComponent implements OnInit {
     if(this.userRegistrationForm.value.password == this.userRegistrationForm.value.confirmPassword){
       this.userService.addUser(body).subscribe((resp:any)=>{
         console.log(resp);
+        this.spinner.hide();
         this._snackBar.open(resp?.message, 'OK', {
           duration: 5000,
           verticalPosition: this.verticalPosition
@@ -54,6 +57,7 @@ export class AddUserComponent implements OnInit {
       },
       error =>{
         console.log(error);
+        this.spinner.hide();
         this._snackBar.open(error?.error?.message, 'OK', {
           duration: 5000,
           verticalPosition: this.verticalPosition

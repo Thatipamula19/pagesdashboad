@@ -10,6 +10,7 @@ import {
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageService } from '../../services/page.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-page',
@@ -23,7 +24,9 @@ export class AddPageComponent implements OnInit {
   editPage: boolean = false;
   pageId: any;
   pageData: any;
-  constructor(private fb: FormBuilder, private pageService: PageService, private activeRoute: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private pageService: PageService, private activeRoute: ActivatedRoute, private router: Router,
+    private spinner: NgxSpinnerService,  
+  ) {
     console.log(this.activeRoute.snapshot.queryParams);
     let data = this.activeRoute.snapshot.queryParams;
     this.pageId = data?.page;
@@ -51,6 +54,7 @@ export class AddPageComponent implements OnInit {
   }
 
   Submit() {
+    this.spinner.show();
     let body = {
       page: this.pageForm.value.page,
       pageUrl: this.pageForm.value.pageUrl,
@@ -63,25 +67,36 @@ export class AddPageComponent implements OnInit {
     if (this.editPage) {
       this.pageService.updatePage(body).subscribe(resp => {
         console.log(resp);
+        this.spinner.hide();
         this.router.navigate([`/view-single-page`], { queryParams: { page: this.pageForm.value.pageUrl } });
+      }, (err) => {
+        this.spinner.hide();
       })
     } else {
       this.pageService.addPage(body).subscribe(resp => {
         console.log(resp);
+        this.spinner.hide();
         this.router.navigate([`/view-single-page`], { queryParams: { page: this.pageForm.value.pageUrl } });
+      }, (err) => {
+        this.spinner.hide();
       })
     }
   }
 
   getPage(page) {
+    this.spinner.show();
     this.pageService.getPage(page).subscribe((resp: any) => {
       console.log(resp);
       this.pageData = resp?.data?.[0];
       this.patchValue();
+      this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
     })
   }
 
  async patchValue() {
+  this.spinner.show();
     console.log(this.pageData);
    await this.pageForm.patchValue({
       page: this.pageData?.page,
@@ -110,7 +125,7 @@ export class AddPageComponent implements OnInit {
       this.keyFeatures().push(futureNew);
     });
     console.log(this.pageForm.value)
-
+    this.spinner.hide();
   }
 
 

@@ -3,6 +3,7 @@ import { UsersService } from '../../services/users.service';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-updateuser',
@@ -15,7 +16,8 @@ export class UpdateuserComponent implements OnInit {
   userId:any;
   userData:any;
   constructor(private userService: UsersService, private _snackBar: MatSnackBar, 
-    @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<UpdateuserComponent>) { 
+    @Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<UpdateuserComponent>,
+    private spinner: NgxSpinnerService,  ) { 
       this.userId = data?.id;
       console.log(data);
       this.userData = data;
@@ -42,6 +44,7 @@ export class UpdateuserComponent implements OnInit {
   }
 
   updateUser(){
+    this.spinner.show();
     let body = {
       userId: this.userId,
       role: this.userUpdateForm?.value?.userRole,
@@ -53,10 +56,13 @@ export class UpdateuserComponent implements OnInit {
     this.userService.updateUser(body).subscribe((resp:any)=>{
       console.log(resp);
       this.dialogRef.close();
+      this.spinner.hide();
       this._snackBar.open(resp?.message, 'OK', {
         duration: 5000,
         verticalPosition: this.verticalPosition
       });
+    }, (err) => {
+      this.spinner.hide();
     })
   }
 

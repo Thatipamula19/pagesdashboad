@@ -7,6 +7,7 @@ import { UpdateuserComponent } from '../updateuser/updateuser.component';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-all-users',
@@ -23,19 +24,23 @@ export class AllUsersComponent implements OnInit {
 
 
   constructor(private userService: UsersService, private dialog: MatDialog, private _snackBar: MatSnackBar,
-    private cdRef: ChangeDetectorRef) { }
+    private cdRef: ChangeDetectorRef, private spinner: NgxSpinnerService,  ) { }
 
   ngOnInit(): void {
   this.getUsers();
   }
 
   getUsers(){
+    this.spinner.show();
     this.userService.getUsers().subscribe((resp:any)=>{
       console.log(resp);
       this.users = new MatTableDataSource<user>(resp?.users);
       this.users.paginator = this.paginator;
       this.users.sort = this.sort;
-      console.log(this.users)
+      console.log(this.users);
+      this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
     })
   }
 

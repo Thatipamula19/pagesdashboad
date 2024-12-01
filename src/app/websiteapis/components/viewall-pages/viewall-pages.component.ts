@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { PageService } from '../../services/page.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-viewall-pages',
   templateUrl: './viewall-pages.component.html',
@@ -21,15 +22,21 @@ export class ViewallPagesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private dialog: MatDialog, private pageService: PageService, private authService: AuthService, private router: Router) { }
+  constructor(private dialog: MatDialog, private pageService: PageService, private authService: AuthService, private router: Router,
+    private spinner: NgxSpinnerService,  
+  ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.pageService.getPages().subscribe((resp: any) => {
       console.log(resp);
       this.pagesData = new MatTableDataSource<Page>(resp?.data);
       this.pagesData.paginator = this.paginator;
       this.pagesData.sort = this.sort;
-      console.log(this.pagesData)
+      console.log(this.pagesData);
+      this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
     });
    this.isAdmin = this.authService.isAdminCheck();
    this.isMarketing = this.authService.isMarketingCheck();
@@ -43,9 +50,13 @@ export class ViewallPagesComponent implements OnInit {
     this.router.navigate([`/add-page`], { queryParams: { page: page } });
   }
   deletePage(page) {
+    this.spinner.show();
     this.pageService.deletePage(page).subscribe((resp: any) => {
       console.log(resp);
       window.location.reload();
+      this.spinner.hide();
+    }, (err) => {
+      this.spinner.hide();
     })
   }
 

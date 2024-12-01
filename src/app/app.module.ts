@@ -8,7 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { WebsiteapisModule } from './websiteapis/websiteapis.module';
 import { UsersModule } from './users/users.module';
 import { MaterialModule } from './module/material/material.modult';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { MaterialModule } from './module/material/material.modult';
     MaterialModule,
     SharedModule,
     WebsiteapisModule,
-    UsersModule
+    UsersModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

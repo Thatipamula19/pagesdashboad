@@ -5,6 +5,7 @@ import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snac
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-login',
@@ -15,7 +16,7 @@ export class UserLoginComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loginForm:any;
   constructor(private userService: UsersService, private _snackBar: MatSnackBar, private router: Router,
-  private dialog: MatDialog  ) { }
+  private dialog: MatDialog, private spinner: NgxSpinnerService,  ) { }
 
   ngOnInit(): void {
     this.initiateForm();
@@ -36,6 +37,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   Submit(){
+    this.spinner.show();
     let body = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
@@ -43,6 +45,7 @@ export class UserLoginComponent implements OnInit {
     this.userService.userLogin(body).subscribe((resp:any)=>{
       console.log(resp);
       if(resp?.userDetails?.role == 'NewUser'){
+        this.spinner.hide();
         this._snackBar.open(`You don't have access to dashborad Please Contact Adimin for Access`, 'OK', {
           duration: 5000,
           verticalPosition: this.verticalPosition
@@ -54,6 +57,7 @@ export class UserLoginComponent implements OnInit {
         });
         localStorage.setItem('token', resp.token);
         localStorage.setItem('userDetails', JSON.stringify(resp?.userDetails));
+        this.spinner.hide();
         if(resp?.userDetails?.role == 'Admin'){
           this.router.navigate(['/all-pages']);
         } else {
@@ -64,6 +68,7 @@ export class UserLoginComponent implements OnInit {
     },
     error =>{
       console.log(error);
+      this.spinner.hide();
       this._snackBar.open(error?.error?.message, 'OK', {
         duration: 5000,
         verticalPosition: this.verticalPosition
