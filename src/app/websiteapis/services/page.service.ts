@@ -13,7 +13,7 @@ export class PageService {
 
 
   getPages(){
-  return this.http.get(this.apiUrl);
+  return this.http.get(`${this.apiUrl}pages`);
   }
 
   addPage(body){
