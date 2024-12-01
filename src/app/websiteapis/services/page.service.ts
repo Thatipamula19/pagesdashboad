@@ -7,13 +7,13 @@ import { Injectable } from '@angular/core';
 export class PageService {
 
   // apiUrl ='http://localhost:8080/pages/';
-  apiUrl = 'https://pagesbackend.onrender.com/';
+  apiUrl = 'https://pagesbackend.onrender.com/pages/';
 
   constructor(private http: HttpClient) { }
 
 
   getPages(){
-  return this.http.get(`${this.apiUrl}pages`);
+  return this.http.get(`${this.apiUrl}`);
   }
 
   addPage(body){
