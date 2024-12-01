@@ -1,0 +1,102 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="h3 text-center">Registration Form</h3>
+                    </div>
+                </div>
+                <form [formGroup]="userRegistrationForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter your fullname</mat-label>
+                                  <input formControlName="fullname" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter your email</mat-label>
+                                  <input type="email" formControlName="email" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter your password</mat-label>
+                                  <input type="password" formControlName="password" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter your password</mat-label>
+                                  <input type="password" formControlName="confirmPassword" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter your Team</mat-label>
+                                  <input type="text" formControlName="team" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter City</mat-label>
+                                  <input type="text" formControlName="city" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter Center Name</mat-label>
+                                  <input type="text" formControlName="centerName" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container">
+                                <mat-form-field appearance="outline">
+                                  <mat-label>Enter Page Url</mat-label>
+                                  <input type="text" formControlName="pageUrl" matInput required>
+                                </mat-form-field>
+                              </div>                          
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" [disabled]="!userRegistrationForm.valid" (click)="Submit()" mat-button
+        [mat-dialog-close]="true" cdkFocusInitial>Register Now</button>
+</mat-dialog-actions>

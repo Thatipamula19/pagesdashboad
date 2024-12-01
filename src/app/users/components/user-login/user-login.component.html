@@ -1,0 +1,47 @@
+<section class="login_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card_center shadow mt-5 p-5">
+                    <form [formGroup]="loginForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="h3 text-center">Login</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="example-container">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your email</mat-label>
+                                        <input type="email" formControlName="email" matInput required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="example-container">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your password</mat-label>
+                                        <input type="password" formControlName="password" matInput required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button mat-raised-button color="primary" [disabled]="!loginForm.valid" (click)="Submit()">Login</button>                          
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <div class="row mt-3">
+                        <div class="col-md-12">
+                            <p>New user?<a class="register" (click)="newUser()">&nbsp;Register</a></p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+<mat-selection-list [multiple]="false">
+    <!-- <mat-list-option (click)="Router('faqs');menuOpen()">
+      See Faqs
+    </mat-list-option> -->
+    <mat-list-option *ngIf="isAdmin" (click)="Router('add-page');menuOpen()">
+      Add Page
+    </mat-list-option>
+    <mat-list-option (click)="gotoPage(isAdmin ? 'all-pages' : userDetails?.pageUrl);menuOpen()">
+      {{ isAdmin ? 'See All Page' : 'Show Page' }}
+    </mat-list-option>
+    <mat-list-option *ngIf="isAdmin" (click)="Router('users');menuOpen()">
+        All Users
+    </mat-list-option>
+  </mat-selection-list>
+  

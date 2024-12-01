@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="userUpdateForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="h3 text-center">Update User</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Update user</mat-label>
+                            <select matNativeControl formControlName="userRole">
+                              <option value="" selected>Select Role</option>
+                              <option value="Admin">Admin</option>
+                              <option value="Developer">Developer</option>
+                              <option value="Marketing">Marketing</option>
+                              <option value="Designer">Designer</option>
+                              <option value="NewUser">New User</option>
+                            </select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="example-container">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Enter City</mat-label>
+                              <input type="text" formControlName="city" matInput required>
+                            </mat-form-field>
+                          </div>                          
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="example-container">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Enter Center Name</mat-label>
+                              <input type="text" formControlName="centerName" matInput required>
+                            </mat-form-field>
+                          </div>                          
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="example-container">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Enter Page Url</mat-label>
+                              <input type="text" formControlName="pageUrl" matInput required>
+                            </mat-form-field>
+                          </div>                          
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button mat-raised-button color="primary" [disabled]="!userUpdateForm.valid" (click)="updateUser()">Update Now</button>                          
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+.dispay_grid{
+    display: flex;
+}
+
+.nav_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav_list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+.nav_list li {
+    cursor: pointer;
+}

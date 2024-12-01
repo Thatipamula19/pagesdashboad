@@ -1,0 +1,8 @@
+<ul class="nav_list">
+    <li><i class="fa-solid fa-user"></i> &nbsp; <i mat-button [matMenuTriggerFor]="menu" class="fa-solid fa-angle-down"></i></li>
+</ul>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>{{userDetails?.fullname}}</button>
+    <button mat-menu-item>{{userDetails?.role}}</button>
+    <button mat-menu-item (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i>&nbsp; Logout</button>
+</mat-menu>

@@ -1,0 +1,71 @@
+<mat-dialog-content class="mat-typography">
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="h3 text-center">Add Faqs</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="faqsForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Page Name</mat-label>
+                                <input matInput formControlName="page" placeholder="Placeholder">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row" formArrayName="faqs" *ngFor="let faq of faqs().controls; let faqIndex = index">
+                        <div [formGroupName]="faqIndex" class="col-md-12 mt-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Quation</mat-label>
+                                        <input matInput formControlName="quation" placeholder="Quation">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Answer</mat-label>
+                                        <textarea matInput formControlName="answer" placeholder="Answer"></textarea>
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <div class="example-button-container d-flex float-right">
+                                <button (click)="removeFaq(faqIndex)" class="ml-3" mat-mini-fab color="warn"
+                                  aria-label="Example icon button with a home icon">
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-3 mt-3">
+                            <button mat-raised-button color="warn">Remove Faq</button>
+                        </div> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- <button mat-raised-button color="primary" (click)="addFaq()">Add Faq</button> -->
+                <div class="example-button-container">
+                    <button (click)="addFaq()" class="ml-3" mat-mini-fab color="primary"
+                      aria-label="Example icon button with a home icon">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" [disabled]="!faqsForm.valid" (click)="Submit()" mat-button
+        [mat-dialog-close]="true" cdkFocusInitial>{{ editpage ? 'Update' : 'Submit'}}</button>
+</mat-dialog-actions>
