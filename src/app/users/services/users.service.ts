@@ -6,27 +6,29 @@ import { Injectable } from '@angular/core';
 })
 export class UsersService {
 
+  // apiUrl ='http://localhost:8080/pages/';
+  apiUrl = 'https://pagesbackend.onrender.com/';
   constructor(private http: HttpClient) { }
 
 
   addUser(body){
-    return this.http.post('http://localhost:8080/user/add', body);
+    return this.http.post(`$${this.apiUrl}user/add`, body);
   }
 
   userLogin(body){
-    return this.http.post('http://localhost:8080/user/login', body);
+    return this.http.post(`${this.apiUrl}user/login`, body);
   }
 
   getUsers(){
-    return this.http.get('http://localhost:8080/user');
+    return this.http.get(`${this.apiUrl}user`);
   }
 
   updateUser(body){
-    return this.http.post('http://localhost:8080/user/update', body);
+    return this.http.post(`${this.apiUrl}user/update`, body);
   }
 
   deleteUser(body){
-    return this.http.post('http://localhost:8080/user/delete', body);
+    return this.http.post(`${this.apiUrl}user/delete`, body);
   }
 
   getUserDetails(){

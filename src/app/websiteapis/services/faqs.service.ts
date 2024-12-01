@@ -6,28 +6,28 @@ import { Injectable } from '@angular/core';
 })
 export class FaqsService {
 
-  faqsApi ='http://localhost:8080/faqs/';
-
+  // apiUrl ='http://localhost:8080/pages/';
+  apiUrl = 'https://pagesbackend.onrender.com/';
   constructor(private http: HttpClient) { }
 
 
   getFaqs(){
-  return this.http.get('http://localhost:8080/faqs');
+  return this.http.get(`${this.apiUrl}faqs`);
   }
 
   addFaqs(body){
-    return this.http.post('http://localhost:8080/faqs/add', body);
+    return this.http.post(`${this.apiUrl}faqs/add`, body);
   }
 
   updateFaqs(body){
-    return this.http.post('http://localhost:8080/faqs/update', body)
+    return this.http.post(`${this.apiUrl}faqs/update`, body)
   }
 
   getFaq(page){
-    return this.http.post('http://localhost:8080/faqs/faq', { page: page })
+    return this.http.post(`${this.apiUrl}faqs/faq`, { page: page })
   }
 
   deleteFaq(page){
-    return this.http.post('http://localhost:8080/faqs/delete', { page: page })
+    return this.http.post(`${this.apiUrl}faqs/delete`, { page: page })
   }
 }

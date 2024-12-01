@@ -6,28 +6,29 @@ import { Injectable } from '@angular/core';
 })
 export class PageService {
 
-  pageApi ='http://localhost:8080/pages/';
+  // apiUrl ='http://localhost:8080/pages/';
+  apiUrl = 'https://pagesbackend.onrender.com/';
 
   constructor(private http: HttpClient) { }
 
 
   getPages(){
-  return this.http.get(this.pageApi);
+  return this.http.get(this.apiUrl);
   }
 
   addPage(body){
-    return this.http.post(`${this.pageApi}addPage`, body);
+    return this.http.post(`${this.apiUrl}addPage`, body);
   }
 
   updatePage(body){
-    return this.http.post(`${this.pageApi}updatePage`, body)
+    return this.http.post(`${this.apiUrl}updatePage`, body)
   }
 
   getPage(page){
-    return this.http.post(`${this.pageApi}page`, { pageUrl: page })
+    return this.http.post(`${this.apiUrl}page`, { pageUrl: page })
   }
 
   deletePage(page){
-    return this.http.post(`${this.pageApi}deletePage`, { pageUrl: page })
+    return this.http.post(`${this.apiUrl}deletePage`, { pageUrl: page })
   }
 }
