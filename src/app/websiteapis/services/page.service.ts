@@ -11,17 +11,21 @@ export class PageService {
 
   constructor(private http: HttpClient) { }
 
+  private headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  };  
 
   getPages(){
-  return this.http.get(`${this.apiUrl}`);
+  return this.http.get(`${this.apiUrl}`, {headers: this.headers});
   }
 
   addPage(body){
-    return this.http.post(`${this.apiUrl}addPage`, body);
+    return this.http.post(`${this.apiUrl}addPage`, body, {headers: this.headers});
   }
 
   updatePage(body){
-    return this.http.post(`${this.apiUrl}updatePage`, body)
+    return this.http.post(`${this.apiUrl}updatePage`, body, {headers: this.headers})
   }
 
   getPage(page){
@@ -29,6 +33,6 @@ export class PageService {
   }
 
   deletePage(page){
-    return this.http.post(`${this.apiUrl}deletePage`, { pageUrl: page })
+    return this.http.post(`${this.apiUrl}deletePage`, { pageUrl: page }, {headers: this.headers})
   }
 }

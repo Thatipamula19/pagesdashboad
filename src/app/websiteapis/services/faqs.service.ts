@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class FaqsService {
 
-  // apiUrl ='http://localhost:8080/pages/';
+  // apiUrl ='http://localhost:8080/';
   apiUrl = 'https://pagesbackend.onrender.com/';
   constructor(private http: HttpClient) { }
 
