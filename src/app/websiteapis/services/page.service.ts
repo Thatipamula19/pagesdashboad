@@ -29,7 +29,7 @@ export class PageService {
   }
 
   getPage(page){
-    return this.http.post(`${this.apiUrl}page`, { pageUrl: page })
+    return this.http.post(`${this.apiUrl}page`, { pageUrl: page }, {headers: this.headers})
   }
 
   deletePage(page){
